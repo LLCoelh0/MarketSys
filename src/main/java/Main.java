@@ -10,9 +10,6 @@ public class Main {
             System.err.println("Failed to initialize FlatLAf");
         }
         //Start window
-        SwingUtilities.invokeLater(() -> {
-            StockViewer viewer = new StockViewer();
-            viewer.setVisible(true);
-        });
+        SwingUtilities.invokeLater(() -> new Login().setVisible(true));
         }
     }
