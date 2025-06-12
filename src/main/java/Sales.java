@@ -38,15 +38,15 @@ public class Sales extends JFrame{
         for (int i = 1; i <= 9; i++ ) {
             int digit = i;
             JButton btn = new JButton(String.valueOf(digit));
-            btn.addActionListener(e -> codeField.setText(codeField.getText() + digit));
+            btn.addActionListener(_ -> codeField.setText(codeField.getText() + digit));
             keypadPanel.add(btn);
         }
         JButton zeroBtn = new JButton("0");
-        zeroBtn.addActionListener(e -> codeField.setText(codeField.getText() + "0"));
+        zeroBtn.addActionListener(_ -> codeField.setText(codeField.getText() + "0"));
         keypadPanel.add(zeroBtn);
         keypadPanel.add(new JButton("."));
         JButton clearBtn = new JButton("Clear");
-        clearBtn.addActionListener(e -> codeField.setText(""));
+        clearBtn.addActionListener(_ -> codeField.setText(""));
         keypadPanel.add(clearBtn);
         //Add keypad
         leftPanel.add(keypadPanel, BorderLayout.CENTER);
@@ -85,10 +85,10 @@ public class Sales extends JFrame{
         rightPanel.add(actionPanel, BorderLayout.SOUTH);
 
         //Add item
-        addItemBtn.addActionListener(e -> addItem());
+        addItemBtn.addActionListener(_ -> addItem());
 
         //Cancel purchase logic
-        cancelBtn.addActionListener(e -> {
+        cancelBtn.addActionListener(_ -> {
             saleModel.setRowCount(0);
             total = 0.0;
             totalLabel.setText("Total: $0.00");
