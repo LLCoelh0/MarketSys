@@ -6,10 +6,13 @@ import java.sql.*;
 import java.util.Properties;
 
 public class Login extends JFrame{
+    //UI fields
     private final JTextField userField;
     private final JPasswordField passField;
 
+    //UI method
     public Login() {
+        //Window setup
         setTitle("MarketSys");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 600);
@@ -26,7 +29,7 @@ public class Login extends JFrame{
         formPanel.add(new JLabel("Password"));
         passField =new JPasswordField();
         formPanel.add(passField);
-        //Create panel
+        //Add panel
         add(formPanel, BorderLayout.CENTER);
         //Login button
         JButton loginButton = new JButton("Login");
@@ -34,6 +37,7 @@ public class Login extends JFrame{
         //Setup and button creation
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(loginButton);
+        //Add login button
         add(buttonPanel, BorderLayout.SOUTH);
     }
     //Login process
@@ -63,12 +67,10 @@ public class Login extends JFrame{
                     //Check credentials
                     ResultSet rs = stmt.executeQuery();
                     if (rs.next()) {
-                        //Successful login
                         JOptionPane.showMessageDialog(this, "Login successful!", "Welcome", JOptionPane.INFORMATION_MESSAGE);
                         dispose();
                         new StockViewer().setVisible(true);
                     } else {
-                        //Invalid credentials
                         JOptionPane.showMessageDialog(this, "Invalid username or password", "Access Denied", JOptionPane.ERROR_MESSAGE);
                     }
                 }
