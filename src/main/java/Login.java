@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.sql.*;
 import java.util.Properties;
 
-public class Login extends JFrame{
+public class Login extends BaseWindow{
     //UI fields
     private final JTextField userField;
     private final JPasswordField passField;

@@ -41,7 +41,15 @@ public class Sales extends JFrame{
         JPanel topButtonsPanel = new JPanel(new GridLayout(1, 3));
         topButtonsPanel.add(new JButton("Closing"));
         topButtonsPanel.add(new JButton("Remove item"));
-        topButtonsPanel.add(new JButton("Lore Ipsum"));
+        //Dashboard Button action setup
+        JButton dashboardBtn = new JButton("Dashboard");
+        dashboardBtn.addActionListener(_ -> {
+            new Dashboard().setVisible(true);
+            dispose();
+        });
+        //Add dashboard button
+        topButtonsPanel.add(dashboardBtn);
+        //Add panel
         leftPanel.add(topButtonsPanel, BorderLayout.NORTH);
         //Keypad setup
         JPanel keypadPanel = new JPanel(new GridLayout(4, 3));

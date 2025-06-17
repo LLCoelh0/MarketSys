@@ -5,28 +5,12 @@ import java.io.FileReader;
 import java.sql.*;
 import java.util.Properties;
 
-public class StockViewer extends JFrame{
+public class StockViewer extends BaseWindow{
     //Table to manage row and column
     private final DefaultTableModel tableModel;
 
     //Constructor to create stock viewer window
     public StockViewer() {
-        //Window initial setup
-        setTitle("MarketSys");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(800, 600);
-        setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
-        //Side panel
-        JPanel sidebar = new JPanel();
-        sidebar.setLayout(new BoxLayout(sidebar, BoxLayout.Y_AXIS));
-        sidebar.setBackground(new Color(40, 40,40));
-        sidebar.setPreferredSize(new Dimension(150, getHeight()));
-        //Menu options
-        sidebar.add(createSidebarButton("Dashboard"));
-        sidebar.add(createSidebarButton("Stock"));
-        sidebar.add(createSidebarButton("Sales"));
-        sidebar.add(createSidebarButton("Manager"));
         //Central pane table
         tableModel = new DefaultTableModel(new String[]{"ID", "Name", "Price", "Quantity"}, 0);
         JTable productTable = new JTable(tableModel);
@@ -47,19 +31,13 @@ public class StockViewer extends JFrame{
         //Read button action
         readButton.addActionListener(_ -> refreshData());
         //Add components to the window
-        add(sidebar, BorderLayout.WEST);
+
         add(scrollPane, BorderLayout.CENTER);
         add(crudPanel, BorderLayout.SOUTH);
         //Load data from database
         loadDataFromDatabase();
     }
-    //Button method
-    private JButton createSidebarButton(String label) {
-        JButton button = new JButton(label);
-        button.setAlignmentX(Component.CENTER_ALIGNMENT);
-        button.setMaximumSize(new Dimension(120,30));
-        return button;
-    }
+
     //Load DB data
     private void loadDataFromDatabase() {
         tableModel.setRowCount(0);
@@ -93,5 +71,9 @@ public class StockViewer extends JFrame{
     //Read button method **provisional**
     private void refreshData(){
         loadDataFromDatabase();
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new StockViewer().setVisible(true));
     }
 }
