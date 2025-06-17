@@ -1,9 +1,7 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.io.FileReader;
 import java.sql.*;
-import java.util.Properties;
 
 public class StockViewer extends BaseWindow{
     //Table to manage row and column
@@ -41,17 +39,10 @@ public class StockViewer extends BaseWindow{
     //Load DB data
     private void loadDataFromDatabase() {
         tableModel.setRowCount(0);
-        Properties props = new Properties();
         try {
-            //Login in database
-            props.load(new FileReader("src\\main\\java\\db.properties"));
-            String url = props.getProperty("db.url");
-            String user = props.getProperty("db.user");
-            String password = props.getProperty("db.password");
-
             try (
                 //Extract data
-                Connection conn = DriverManager.getConnection(url, user, password);
+                Connection conn = DatabaseConfig.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT * FROM stock")
             ) {

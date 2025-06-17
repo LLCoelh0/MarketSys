@@ -1,11 +1,9 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.io.FileReader;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 public class Sales extends JFrame{
     //UI fields
@@ -132,14 +130,8 @@ public class Sales extends JFrame{
         }
 
         try {
-            //DB connection
-            Properties props = new Properties();
-            props.load(new FileReader("src\\main\\java\\db.properties"));
-            String url = props.getProperty("db.url");
-            String user = props.getProperty("db.user");
-            String pass =props.getProperty("db.password");
             //DB data extraction
-            try (Connection conn = DriverManager.getConnection(url, user, pass)) {
+            try (Connection conn = DatabaseConfig.getConnection()) {
                 String selectSql = "SELECT * FROM stock WHERE product_id = ?";
                 PreparedStatement selectStmt = conn.prepareStatement(selectSql);
                 selectStmt.setInt(1, Integer.parseInt(code));
@@ -178,14 +170,8 @@ public class Sales extends JFrame{
     //Finish sale and update the DB method
     private void finishPurchase() {
         try {
-            //DB connection
-            Properties props = new Properties();
-            props.load(new FileReader("src\\main\\java\\db.properties"));
-            String url = props.getProperty("db.url");
-            String user = props.getProperty("db.user");
-            String pass = props.getProperty("db.password");
             //DB Update
-            try (Connection conn = DriverManager.getConnection(url, user, pass)) {
+            try (Connection conn = DatabaseConfig.getConnection()) {
                 for (SaleItem item : saleItems) {
                     String updateSql = "UPDATE stock SET quantity = quantity - ? WHERE product_id = ?";
                     PreparedStatement updateStmt = conn.prepareStatement(updateSql);
