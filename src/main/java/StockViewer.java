@@ -26,6 +26,13 @@ public class StockViewer extends BaseWindow{
         crudPanel.add(readButton);
         crudPanel.add(updateButton);
         crudPanel.add(deleteButton);
+
+        createButton.addActionListener(_ -> new CrudPopup(this, "Create", "stock"));
+        updateButton.addActionListener(_ -> new CrudPopup(this, "Update", "stock"));
+        deleteButton.addActionListener(_ -> new CrudPopup(this, "Delete", "stock"));
+        readButton.addActionListener(_ -> refreshData());
+
+
         //Read button action
         readButton.addActionListener(_ -> refreshData());
         //Add components to the window

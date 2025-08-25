@@ -18,14 +18,22 @@ public class PersonnelManagement extends BaseWindow {
         //CRUD setup panel
         JPanel crudPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         crudPanel.setBorder(BorderFactory.createTitledBorder("Manage Employees"));
-        JButton creteBtn = new JButton("Create");
+        JButton create = new JButton("Create");
         JButton readBtn = new JButton("Refresh");
         JButton updateBtn = new JButton("Button");
         JButton deleteBtn = new JButton("Delete");
-        crudPanel.add(creteBtn);
+
+        crudPanel.add(create);
         crudPanel.add(readBtn);
         crudPanel.add(updateBtn);
         crudPanel.add(deleteBtn);
+
+        create.addActionListener(_ -> new CrudPopup(this, "Create", "employees"));
+        updateBtn.addActionListener(_ -> new CrudPopup(this, "Update", "employees"));
+        deleteBtn.addActionListener(_ -> new CrudPopup(this, "Delete", "employees"));
+        readBtn.addActionListener(_ -> loadEmployeesFromDB());
+
+
         //Add CRUD panel
         add(crudPanel, BorderLayout.SOUTH);
 
