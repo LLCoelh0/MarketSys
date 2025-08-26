@@ -20,30 +20,28 @@ public class PersonnelManagement extends BaseWindow {
         crudPanel.setBorder(BorderFactory.createTitledBorder("Manage Employees"));
         JButton create = new JButton("Create");
         JButton readBtn = new JButton("Refresh");
-        JButton updateBtn = new JButton("Button");
+        JButton updateBtn = new JButton("Update" );
         JButton deleteBtn = new JButton("Delete");
-
+        //Crud buttons creation
         crudPanel.add(create);
         crudPanel.add(readBtn);
         crudPanel.add(updateBtn);
         crudPanel.add(deleteBtn);
-
-        create.addActionListener(_ -> new CrudPopup(this, "Create", "employees"));
-        updateBtn.addActionListener(_ -> new CrudPopup(this, "Update", "employees"));
-        deleteBtn.addActionListener(_ -> new CrudPopup(this, "Delete", "employees"));
+        //Crud popup action listener
+        create.addActionListener(_ -> new CrudPopup(this, "employees", "Create"));
+        updateBtn.addActionListener(_ -> new CrudPopup(this, "employees", "Update"));
+        deleteBtn.addActionListener(_ -> new CrudPopup(this, "employees", "Delete"));
         readBtn.addActionListener(_ -> loadEmployeesFromDB());
-
 
         //Add CRUD panel
         add(crudPanel, BorderLayout.SOUTH);
-
 
         //Refresh table
         readBtn.addActionListener(_ -> loadEmployeesFromDB());
         //Refresh table on start
         loadEmployeesFromDB();
     }
-
+    //Load employees from db
     private void loadEmployeesFromDB() {
         employeeModel.setNumRows(0);
         try {
@@ -69,5 +67,4 @@ public class PersonnelManagement extends BaseWindow {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new PersonnelManagement().setVisible(true));
     }
-
 }

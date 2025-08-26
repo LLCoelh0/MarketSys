@@ -19,7 +19,7 @@ public class StockViewer extends BaseWindow{
         crudPanel.setBorder(BorderFactory.createTitledBorder("CRUD actions"));
         //CRUD buttons
         JButton createButton = new JButton("Create");
-        JButton readButton = new JButton("Read");
+        JButton readButton = new JButton("Refresh");
         JButton updateButton = new JButton("Update");
         JButton deleteButton = new JButton("Delete");
         crudPanel.add(createButton);
@@ -27,9 +27,9 @@ public class StockViewer extends BaseWindow{
         crudPanel.add(updateButton);
         crudPanel.add(deleteButton);
 
-        createButton.addActionListener(_ -> new CrudPopup(this, "Create", "stock"));
-        updateButton.addActionListener(_ -> new CrudPopup(this, "Update", "stock"));
-        deleteButton.addActionListener(_ -> new CrudPopup(this, "Delete", "stock"));
+        createButton.addActionListener(_ -> new CrudPopup(this, "stock", "Create"));
+        updateButton.addActionListener(_ -> new CrudPopup(this, "stock", "Update"));
+        deleteButton.addActionListener(_ -> new CrudPopup(this, "stock", "Delete"));
         readButton.addActionListener(_ -> refreshData());
 
 
